@@ -1,0 +1,57 @@
+  docker ps -a
+  docker exec -it 8fd78bc30551 sh
+  docker ps -a
+  docker exec -it 8fd78bc30551 sh
+  docker stop 8fd78bc30551
+  docker contaiber prune
+  docker stop smart-web-info-test
+  docker ps -a
+
+
+
+vi Dockerfile
+  mkdir target
+  docker images
+  docker container prune
+  docker images
+  docker ps -a
+  docker pull openjdk:15-jdk-alpine
+  ls
+  vi Dockerfile
+  docker build -t web-info .
+  docker ps -a
+  docker image ls
+  docker build -t smart-web-info .
+  docker scan
+  docker run -it web-info sh
+  docker ps -a
+  docker run -it web-info sh
+  docker run -d --rm  --name smart-web-info -p 8080:8080 web-info
+  docker image
+  docker image ls
+  docker run -d --rm  --name smart-web-info-test -p 8080:8080 8fd78bc30551
+  docker run -d --rm  --name smart-web-info-test -p 8080:8080 1659f966695a
+
+
+docker run --rm -d --name znginx -p 8080:80 nginx
+docker ps -a
+docker container stop f1e144af746c
+docker container prune
+
+
+  546  vi Dockerfile
+  547  ls
+  548  cd MyNginxDocker/
+  549  ls
+  550  vi Dockerfile
+  551  docker run -it nginx sh
+  552  vi Dockerfile
+  553  docker build -t mynginx .
+  554  docker ps -a
+  555  docker image ls
+  556  docker run --rm -d --name mynginx -p 8080:80 mynginx
+  557  ls
+  558  vi target/index.html
+  559  history
+  560  vi Dockerfile
+  561  curl localhost:8080
