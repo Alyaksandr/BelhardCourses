@@ -1,0 +1,57 @@
+PostGRE SQL
+
+1. Создайте рабочий сервер Postgresql SQL.
+2. Авторизуйтесь и создайте базу данных любым способом (pgAdmin, PSQL).
+3. В базе данных создайте 3 таблицы: Endangered, Critically_Endangered, Extinct.
+4. Пользуясь википедией внесите животных для каждой из таблиц со значениями имени, ореала обитания, численностью и т.д.. Количество данных от 5 столбцов, количество животных от 5 наименований.
+5. Выведите на экран содержание каждой из таблиц.
+6. Постройте запрос, который бы выводил животное с наименьшим количеством особей для каждой из 3х таблиц.
+***7. Создайте второй инстанс с Postgresql. На первом создайте бэкап базы, используя бэкап, создайте базу данных на втором инстансе.
+
+
+
+docker run -d -e POSTGRES_HOST_AUTH_METHOD=trust postgres
+docker exec -it 09b2abdfeb0dab3f9b70feb9937c50d2da8d276e612ef455c168ed94f9063faa /bin/bash
+root@09b2abdfeb0d:/# psql -U postgres
+CREATE DATABASE test;
+postgres=# \c test;
+
+
+CREATE TABLE Critically_Endangered
+(
+    Id SERIAL PRIMARY KEY,
+    Name CHARACTER VARYING(30),
+    Place CHARACTER VARYING(30),
+    Amount INTEGER
+);
+
+
+
+CREATE TABLE Endangered
+(
+    Id SERIAL PRIMARY KEY,
+    Name CHARACTER VARYING(30),
+    Place CHARACTER VARYING(30),
+    Amount INTEGER
+);
+
+
+
+INSERT INTO Extinct(Name, Place, Amount)
+VALUES
+('Gigantskaya fossa', 'Madagaskar', 0),
+('Dodo',  'Mavrikiy', 0),
+('Kavkazskiy zubr',  'Kavkaz', 0),
+('Zakavkazskiy tigr',  'Kavkaz', 0),
+('Martinikskiy ara',  'Martinika', 0);
+
+INSERT INTO Endangered(Name, Place, Amount)
+VALUES
+('Sumatranskiy nosorog', 'Indonezia', 275),
+('Slonovaya cherepaha',  'Galapagosi', 1500),
+('Lopaten','Russia',220),
+('Geometrincheskaya cherepaha','southwest Africa',3900);
+
+select name, amount from Extinct t  where t.amount=(select min(amount) from  Extinct)
+union
+select name, amount from Endangered t  where t.amount=(select min(amount) from  Endangered);
